@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charity Profile Page</title>
+  <style>
+    #volunteer-form-container {
+      display: none;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      max-width: 400px;
+      margin: 1rem auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .extra-details {
+      color: #ff5e57;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .charity-box {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #ff5e57;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Charity Profile Page</h1>
+
+  <div class="charity-box" id="charity1">
+    <h2>Green Earth Initiative</h2>
+    <button class="volunteer-button">Volunteer Now</button>
+  </div>
+  <div class="charity-box" id="charity2">
+    <h2>Food for All</h2>
+    <button class="volunteer-button">Volunteer Now</button>
+  </div>
+
+  <div id="volunteer-form-container">
+    <h3>Volunteer Signup</h3>
+    <form id="volunteer-form">
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" placeholder="Enter your name" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0;"><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" placeholder="Enter your email" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0;"><br>
+      <button type="button" id="submit-form">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  
+      const volunteerButtons = document.querySelectorAll('.volunteer-button');
+      volunteerButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          document.getElementById('volunteer-form-container').style.display = 'block';
+        });
+      });
+
+      document.getElementById('submit-form').addEventListener('click', () => {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        if (name && email) {
+          alert(`Thank you for volunteering, ${name}! We will contact you at ${email}.`);
+          document.getElementById('volunteer-form-container').style.display = 'none';
+        } else {
+          alert("Please fill out all fields.");
+        }
+      });
+
+      const charityBoxes = document.querySelectorAll('.charity-box');
+      charityBoxes.forEach(box => {
+        box.addEventListener('mouseenter', () => {
+          const extraDetails = document.createElement('p');
+          extraDetails.textContent = "Learn more about our mission and projects!";
+          extraDetails.classList.add('extra-details');
+          box.appendChild(extraDetails);
+        });
+
+        box.addEventListener('mouseleave', () => {
+          const extraDetails = box.querySelector('.extra-details');
+          if (extraDetails) {
+            box.removeChild(extraDetails);
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
